@@ -32,10 +32,12 @@ public class MergeOrderedList {
         }
         while (l1 != null && l2 != null) {
             while (l1.val >= pNode.val) {
+                // qNode指向当前l2元素，qNode指向下一个
                 qNode = pNode;
                 if (pNode.next != null) {
                     pNode = pNode.next;
                 } else {
+                    // pNode等于null说明l2结束了，在后面直接追加l1即可
                     qNode.next = l1;
                     return l2;
                 }
@@ -43,10 +45,12 @@ public class MergeOrderedList {
 
             ListNode temp = new ListNode(l1.val);
             if (qNode != pNode) {
+                // 不等时说明l1元素在l2第一个元素之后，正常追加到qNode和pNode之间，然后qNode重新指向新加的temp元素
                 qNode.next = temp;
                 qNode = temp;
                 temp.next = pNode;
             } else {
+                // pNode和qNode相等说明l1的元素比l2所有元素小，所以加在l2头部，pNode和qNode重新指向l2头部
                 l2 = temp;
                 l2.next = pNode;
                 qNode = l2;
